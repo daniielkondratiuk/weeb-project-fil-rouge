@@ -16,7 +16,7 @@ body {
 
 body {
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  background: #f6f7fb;
+  background: #0b1220;
   color: #111827;
 }
 
@@ -36,29 +36,15 @@ a:hover {
 }
 
 .container {
-  width: min(1100px, 100% - 32px);
+  width: 100%;
+  max-width: 1360px;
   margin: 0 auto;
+  padding: 0 80px;
 }
 
-.header,
-.footer {
-  background: #ffffff;
-  border-bottom: 1px solid #e5e7eb;
-}
-
-.footer {
-  border-bottom: none;
-  border-top: 1px solid #e5e7eb;
-}
-
-.nav {
-  display: flex;
-  gap: 16px;
-  padding: 16px 0;
-}
-
-.main {
-  flex: 1;
-  padding: 24px 0;
+@media (max-width: 520px) {
+  .container {
+    padding: 0 20px;
+  }
 }
 
