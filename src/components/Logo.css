@@ -1,0 +1,16 @@
+.logo {
+  font-family: Roboto, sans-serif;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 110%;
+}
+
+.logo--light {
+  color: #ffffff;
+}
+
+.logo--dark {
+  color: #0f172a;
+}
+
