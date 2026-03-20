@@ -1,0 +1,64 @@
+:root {
+  color-scheme: light;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background: #f6f7fb;
+  color: #111827;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  width: min(1100px, 100% - 32px);
+  margin: 0 auto;
+}
+
+.header,
+.footer {
+  background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.footer {
+  border-bottom: none;
+  border-top: 1px solid #e5e7eb;
+}
+
+.nav {
+  display: flex;
+  gap: 16px;
+  padding: 16px 0;
+}
+
+.main {
+  flex: 1;
+  padding: 24px 0;
+}
+
