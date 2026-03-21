@@ -1,18 +1,12 @@
-import { Link, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 
-import Header from "./Header.jsx";
-import Footer from "./Footer.jsx";
+import Header from "./Header/Header.jsx";
+import Footer from "./Footer/Footer.jsx";
 
 export default function RootLayout() {
   return (
     <div className="app">
-      <Header>
-        <nav className="nav">
-          <Link to="/">Home</Link>
-          <Link to="/contact">Contact</Link>
-          <Link to="/login">Login</Link>
-        </nav>
-      </Header>
+      <Header />
 
       <main className="main">
         <Outlet />
