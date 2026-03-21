@@ -1,21 +1,23 @@
-import { createBrowserRouter } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
+import RootLayout from "../components/layout/RootLayout.jsx";
 import Home from "../pages/Home.jsx";
 import Contact from "../pages/Contact.jsx";
 import Login from "../pages/Login.jsx";
 import NotFound from "../pages/NotFound.jsx";
-import RootLayout from "../components/layout/RootLayout.jsx";
 
-export const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <RootLayout />,
-    children: [
-      { index: true, element: <Home /> },
-      { path: "contact", element: <Contact /> },
-      { path: "login", element: <Login /> },
-      { path: "*", element: <NotFound /> }
-    ],
-  },
-]);
+export default function AppRouter() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route element={<RootLayout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  );
+}
 
