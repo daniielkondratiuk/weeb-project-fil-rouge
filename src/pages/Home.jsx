@@ -1,9 +1,18 @@
+import HeroSection from "../components/home/HeroSection.jsx";
+import TrustSection from "../components/home/TrustSection.jsx";
+import ResourcesSection from "../components/home/ResourcesSection.jsx";
+import TrendsSection from "../components/home/TrendsSection.jsx";
+
+import "./Home.css";
+
 export default function Home() {
   return (
-    <section>
-      <h1>Home</h1>
-      <p>Home page</p>
-    </section>
+    <div className="home">
+      <HeroSection />
+      <TrustSection />
+      <ResourcesSection />
+      <TrendsSection />
+    </div>
   );
 }
 
