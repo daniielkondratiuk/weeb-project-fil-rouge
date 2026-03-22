@@ -1,0 +1,155 @@
+/* Figma node 0:744 "Shapes" — stacked rotated squares, animated */
+
+.trendsAnimation {
+  position: relative;
+  width: 100%;
+  max-width: 640px;
+  margin-inline: auto;
+  aspect-ratio: 640 / 480;
+  border-radius: 24px;
+  /* no overflow:hidden — rotating squares need sqrt(2) headroom vs. side length */
+  overflow: visible;
+  box-sizing: border-box;
+  padding: clamp(12px, 3.5%, 24px);
+}
+
+.trendsAnimation__orbit {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  transform-origin: 50% 50%;
+}
+
+.trendsAnimation__square {
+  flex-shrink: 0;
+  box-sizing: border-box;
+  aspect-ratio: 1;
+  border: 5px solid #581c87;
+  background: transparent;
+}
+
+/* Max ~70.7% of stage so corners stay inside while spinning (was 90% → clipped) */
+.trendsAnimation__square--1 {
+  width: 68%;
+}
+
+.trendsAnimation__square--2 {
+  width: 61.6%;
+}
+
+.trendsAnimation__square--3 {
+  width: 55%;
+}
+
+.trendsAnimation__square--4 {
+  width: 48.7%;
+}
+
+.trendsAnimation__square--solid {
+  width: 42.5%;
+  border-color: #be185d;
+  background: #be185d;
+}
+
+.trendsAnimation__orbit--1 {
+  z-index: 1;
+  animation: trendsAnimationSpin1 26s linear infinite;
+}
+
+.trendsAnimation__orbit--2 {
+  z-index: 2;
+  animation: trendsAnimationSpin2 19s linear infinite reverse;
+}
+
+.trendsAnimation__orbit--3 {
+  z-index: 3;
+  animation: trendsAnimationSpin3 22s linear infinite;
+}
+
+.trendsAnimation__orbit--4 {
+  z-index: 4;
+  animation: trendsAnimationSpin4 16s linear infinite reverse;
+}
+
+.trendsAnimation__orbit--5 {
+  z-index: 5;
+  animation: trendsAnimationSpin5 12s linear infinite;
+}
+
+@keyframes trendsAnimationSpin1 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes trendsAnimationSpin2 {
+  from {
+    transform: rotate(44.74deg);
+  }
+  to {
+    transform: rotate(404.74deg);
+  }
+}
+
+@keyframes trendsAnimationSpin3 {
+  from {
+    transform: rotate(59.77deg);
+  }
+  to {
+    transform: rotate(419.77deg);
+  }
+}
+
+@keyframes trendsAnimationSpin4 {
+  from {
+    transform: rotate(74.87deg);
+  }
+  to {
+    transform: rotate(434.87deg);
+  }
+}
+
+@keyframes trendsAnimationSpin5 {
+  from {
+    transform: rotate(14.87deg);
+  }
+  to {
+    transform: rotate(374.87deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trendsAnimation__orbit--1,
+  .trendsAnimation__orbit--2,
+  .trendsAnimation__orbit--3,
+  .trendsAnimation__orbit--4,
+  .trendsAnimation__orbit--5 {
+    animation: none;
+  }
+
+  .trendsAnimation__orbit--1 {
+    transform: rotate(0deg);
+  }
+
+  .trendsAnimation__orbit--2 {
+    transform: rotate(44.74deg);
+  }
+
+  .trendsAnimation__orbit--3 {
+    transform: rotate(59.77deg);
+  }
+
+  .trendsAnimation__orbit--4 {
+    transform: rotate(74.87deg);
+  }
+
+  .trendsAnimation__orbit--5 {
+    transform: rotate(14.87deg);
+  }
+}

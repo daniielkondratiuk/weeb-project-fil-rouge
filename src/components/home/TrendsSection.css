@@ -1,0 +1,147 @@
+.trendsSection {
+  padding: 80px 0;
+}
+
+.trendsSection__grid {
+  display: flex;
+  gap: 36px;
+  align-items: center;
+}
+
+.trendsSection__visual {
+  flex: 0 0 45%;
+}
+
+.trendsSection__text {
+  flex: 0 0 55%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 32px;
+}
+
+.trendsSection__top {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  width: 100%;
+}
+
+.trendsSection__kicker {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+.trendsSection__title {
+  margin: 0;
+  font-size: 72px;
+  line-height: 1.1;
+  font-weight: 800;
+  letter-spacing: 0;
+  color: #ffffff;
+}
+
+.trendsSection__accent {
+  color: #c084fc;
+}
+
+.trendsSection__desc {
+  margin: 0;
+  max-width: none;
+  font-size: 18px;
+  line-height: 1.6;
+  color: #ffffff;
+}
+
+.trendsSection__link {
+  display: inline-flex;
+  gap: 16px;
+  align-items: center;
+  margin-top: 0;
+  padding: 16px 0;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: 0.5px;
+  color: #ffffff;
+  text-decoration: none;
+  transition: transform 180ms ease, opacity 180ms ease;
+}
+
+.trendsSection__link:hover {
+  transform: scale(1.05);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.trendsSection__link:focus-visible {
+  outline: 2px solid rgba(192, 132, 252, 0.85);
+  outline-offset: 3px;
+}
+
+.trendsSection__link:active {
+  transform: translateY(1px);
+}
+
+.trendsSection__visual {
+  border-radius: 24px;
+  overflow: visible;
+}
+
+.trendsSection__image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.trendsSection__newsletterAnchor {
+  height: 1px;
+}
+
+@media (max-width: 900px) {
+  .trendsSection__grid {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .trendsSection__visual {
+    order: -1;
+    flex: 0 0 auto;
+  }
+
+  .trendsSection__text {
+    flex: 0 0 auto;
+    align-items: center;
+    text-align: center;
+  }
+
+  .trendsSection__top {
+    align-items: center;
+  }
+
+  .trendsSection__title {
+    font-size: 56px;
+  }
+}
+
+@media (max-width: 520px) {
+  .trendsSection__title {
+    font-size: 40px;
+  }
+
+  .trendsSection__kicker {
+    font-size: 16px;
+    letter-spacing: 2px;
+  }
+
+  .trendsSection__desc {
+    font-size: 16px;
+  }
+}
+
