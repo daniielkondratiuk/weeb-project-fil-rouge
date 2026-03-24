@@ -1,0 +1,53 @@
+.field {
+  position: relative;
+  width: 100%;
+}
+
+.field__input {
+  width: 100%;
+  padding: 2px 0 10px;
+  border: none;
+  border-bottom: 1px solid #af52de;
+  background: transparent;
+  color: #ffffff;
+  font: inherit;
+  font-size: 20px;
+  text-align: center;
+}
+
+.field__input--multiline {
+  min-height: 52px;
+  resize: vertical;
+}
+
+.field__input:focus {
+  outline: none;
+}
+
+.field__label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  color: #c084fc;
+  font-size: 25px;
+  pointer-events: none;
+}
+
+.field__input:not(:placeholder-shown) ~ .field__label {
+  opacity: 0;
+}
+
+@media (max-width: 520px) {
+  .field__label {
+    font-size: 20px;
+  }
+
+  .field__input {
+    font-size: 17px;
+  }
+}
