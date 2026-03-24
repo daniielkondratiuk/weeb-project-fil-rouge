@@ -1,0 +1,35 @@
+.phoneField {
+  display: flex;
+  width: 100%;
+  height: 41px;
+  border: 1px solid #af52de;
+}
+
+.phoneField__code,
+.phoneField__number {
+  border: none;
+  background: transparent;
+  color: #ffffff;
+  font: inherit;
+  font-size: 18px;
+  text-align: center;
+}
+
+.phoneField__code {
+  width: 50%;
+}
+
+.phoneField__number {
+  width: 50%;
+  border-left: 1px solid #af52de;
+}
+
+.phoneField__code::placeholder,
+.phoneField__number::placeholder {
+  color: rgba(192, 132, 252, 0.7);
+}
+
+.phoneField__code:focus,
+.phoneField__number:focus {
+  outline: none;
+}
