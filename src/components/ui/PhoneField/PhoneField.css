@@ -3,6 +3,16 @@
   width: 100%;
   height: 41px;
   border: 1px solid #af52de;
+  transition: border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.phoneField:hover {
+  border-color: #c084fc;
+}
+
+.phoneField:focus-within {
+  border-color: #c084fc;
+  box-shadow: 0 0 0 3px rgba(192, 132, 252, 0.25);
 }
 
 .phoneField__code,

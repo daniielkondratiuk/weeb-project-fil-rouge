@@ -13,6 +13,7 @@
   font: inherit;
   font-size: 20px;
   text-align: center;
+  transition: border-color 180ms ease, box-shadow 180ms ease;
 }
 
 .field__input--multiline {
@@ -20,8 +21,14 @@
   resize: vertical;
 }
 
+.field__input:hover {
+  border-bottom-color: #c084fc;
+}
+
 .field__input:focus {
   outline: none;
+  border-bottom-color: #c084fc;
+  box-shadow: 0 2px 0 -1px rgba(192, 132, 252, 0.6);
 }
 
 .field__label {
@@ -36,9 +43,11 @@
   color: #c084fc;
   font-size: 25px;
   pointer-events: none;
+  transition: opacity 180ms ease;
 }
 
-.field__input:not(:placeholder-shown) ~ .field__label {
+.field__input:not(:placeholder-shown) ~ .field__label,
+.field__input:focus ~ .field__label {
   opacity: 0;
 }
 
