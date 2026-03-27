@@ -6,6 +6,34 @@
   width: 100%;
 }
 
+.loginForm__password {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  width: 100%;
+}
+
+.loginForm__toggle {
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #c084fc;
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+  transition: color 180ms ease;
+}
+
+.loginForm__toggle:hover {
+  color: #ffffff;
+}
+
+.loginForm__toggle:focus-visible {
+  outline: 2px solid rgba(192, 132, 252, 0.6);
+  outline-offset: 2px;
+}
+
 .loginForm__error {
   margin: 0;
   font-size: 15px;

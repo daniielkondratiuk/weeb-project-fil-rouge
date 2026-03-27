@@ -7,6 +7,7 @@ import "./LoginForm.css";
 export default function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [error, setError] = useState("");
 
   function handleSubmit(e) {
@@ -26,14 +27,26 @@ export default function LoginForm() {
     <form className="loginForm" onSubmit={handleSubmit} noValidate>
       <Field id="email" name="email" label="Email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
 
-      <Field
-        id="password"
-        name="password"
-        label="Password"
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
+      <div className="loginForm__password">
+        <Field
+          id="password"
+          name="password"
+          label="Password"
+          type={isPasswordVisible ? "text" : "password"}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+
+        <button
+          className="loginForm__toggle"
+          type="button"
+          onClick={() => setIsPasswordVisible((prev) => !prev)}
+          aria-pressed={isPasswordVisible}
+          aria-label={isPasswordVisible ? "Masquer le mot de passe" : "Afficher le mot de passe"}
+        >
+          {isPasswordVisible ? "Masquer" : "Afficher"}
+        </button>
+      </div>
 
       {error && (
         <p className="loginForm__error" role="alert">
