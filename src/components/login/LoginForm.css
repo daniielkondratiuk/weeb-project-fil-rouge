@@ -77,3 +77,23 @@
 .loginForm__signupLink {
   color: #ffffff;
 }
+
+.loginForm .field__label {
+  font-size: 23px;
+  font-weight: 500;
+}
+
+.loginForm .field__input {
+  font-size: 18px;
+}
+
+@media (max-width: 520px) {
+  .loginForm {
+    gap: 26px;
+    width: 250px;
+  }
+
+  .loginForm .field__label {
+    font-size: 20px;
+  }
+}
