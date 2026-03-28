@@ -27,6 +27,9 @@ export default function Header() {
                 <NavLink className={({ isActive }) => navClassName(isActive)} to="/">
                   About Us
                 </NavLink>
+                <NavLink className={({ isActive }) => navClassName(isActive)} to="/blog">
+                  Blog
+                </NavLink>
                 <NavLink className={({ isActive }) => navClassName(isActive)} to="/contact">
                   Contact
                 </NavLink>
@@ -66,6 +69,13 @@ export default function Header() {
                 onClick={() => setIsMenuOpen(false)}
               >
                 About Us
+              </NavLink>
+              <NavLink
+                className={({ isActive }) => navClassName(isActive)}
+                to="/blog"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Blog
               </NavLink>
               <NavLink
                 className={({ isActive }) => navClassName(isActive)}
