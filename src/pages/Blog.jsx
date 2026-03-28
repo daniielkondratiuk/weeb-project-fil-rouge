@@ -6,7 +6,7 @@ import { categories, useArticles } from "../hooks/useArticles.js";
 import "./Blog.css";
 
 export default function Blog() {
-  const { articles, error } = useArticles();
+  const { articles, isLoading, error } = useArticles();
   const [query, setQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState("");
 
@@ -68,11 +68,17 @@ export default function Blog() {
           </p>
         )}
 
-        <div className="blog__grid">
-          {visibleArticles.map((article) => (
-            <ArticleCard key={article.id} article={article} />
-          ))}
-        </div>
+        {isLoading ? (
+          <p className="blog__status">Chargement des articles...</p>
+        ) : visibleArticles.length === 0 ? (
+          <p className="blog__status">Aucun article ne correspond à votre recherche.</p>
+        ) : (
+          <div className="blog__grid">
+            {visibleArticles.map((article) => (
+              <ArticleCard key={article.id} article={article} />
+            ))}
+          </div>
+        )}
       </section>
     </div>
   );
