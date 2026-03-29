@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
+import RelatedArticles from "../components/blog/RelatedArticles.jsx";
 import { fetchArticle } from "../api/articles.js";
 import { toArticle } from "../hooks/useArticles.js";
 
@@ -84,6 +85,8 @@ export default function Article() {
             </p>
           ))}
         </div>
+
+        <RelatedArticles category={article.category} currentId={article.id} />
       </article>
     </div>
   );
