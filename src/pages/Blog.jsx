@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import ArticleCard from "../components/blog/ArticleCard.jsx";
+import Button from "../components/ui/Button/Button.jsx";
 import { categories, useArticles } from "../hooks/useArticles.js";
 
 import "./Blog.css";
@@ -25,6 +26,10 @@ export default function Blog() {
           <p className="blog__lead">
             Retrouvez tous nos articles sur le développement, le design et les tendances du web. Un nouveau contenu chaque semaine.
           </p>
+
+          <Button to="/blog/nouveau" variant="primary" className="blog__write">
+            Écrire un article
+          </Button>
         </div>
 
         <div className="blog__filters">
