@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 
 import RelatedArticles from "../components/blog/RelatedArticles.jsx";
 import { fetchArticle } from "../api/articles.js";
+import { readLocalArticles } from "../api/localArticles.js";
 import { toArticle } from "../hooks/useArticles.js";
 
 import "./Article.css";
@@ -19,6 +20,14 @@ export default function Article() {
     async function load() {
       setIsLoading(true);
       setError("");
+
+      const local = readLocalArticles().find((item) => String(item.id) === id);
+
+      if (local) {
+        setArticle(local);
+        setIsLoading(false);
+        return;
+      }
 
       try {
         const data = await fetchArticle(id);

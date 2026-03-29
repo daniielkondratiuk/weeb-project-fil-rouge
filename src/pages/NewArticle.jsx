@@ -2,7 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import Button from "../components/ui/Button/Button.jsx";
-import { categories } from "../hooks/useArticles.js";
+import { saveLocalArticle } from "../api/localArticles.js";
+import { categories, toExcerpt } from "../hooks/useArticles.js";
 
 import "./NewArticle.css";
 
@@ -20,6 +21,14 @@ export default function NewArticle() {
       setError("Merci de renseigner un titre et un contenu.");
       return;
     }
+
+    saveLocalArticle({
+      id: `local-${Date.now()}`,
+      title: title.trim(),
+      body: body.trim(),
+      excerpt: toExcerpt(body.trim()),
+      category,
+    });
 
     setTitle("");
     setBody("");

@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 
 import { fetchArticles } from "../api/articles.js";
+import { readLocalArticles } from "../api/localArticles.js";
 
 export const categories = ["Développement", "Design", "SEO", "Accessibilité", "Outils"];
 
-function toExcerpt(text, limit = 120) {
+export function toExcerpt(text, limit = 120) {
   if (!text) {
     return "";
   }
@@ -38,12 +39,12 @@ export function useArticles() {
         const data = await fetchArticles();
 
         if (!cancelled) {
-          setArticles(data.map(toArticle));
+          setArticles([...readLocalArticles(), ...data.map(toArticle)]);
         }
       } catch (err) {
         if (!cancelled) {
           setError("Impossible de charger les articles pour le moment.");
-          setArticles([]);
+          setArticles(readLocalArticles());
         }
       } finally {
         if (!cancelled) {
