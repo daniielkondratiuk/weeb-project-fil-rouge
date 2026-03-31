@@ -1,0 +1,53 @@
+.brandMarquee {
+  width: 100%;
+  overflow: hidden;
+}
+
+.brandMarquee__track {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  width: max-content;
+  animation: brandMarqueeScroll 32s linear infinite;
+}
+
+.brandMarquee:hover .brandMarquee__track {
+  animation-play-state: paused;
+}
+
+.brandMarquee__item {
+  margin-right: 80px;
+}
+
+.brandMarquee__logo {
+  display: block;
+  width: auto;
+  max-width: 180px;
+  height: 32px;
+  object-fit: contain;
+  filter: grayscale(1) contrast(1.05);
+  opacity: 0.9;
+}
+
+@keyframes brandMarqueeScroll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 520px) {
+  .brandMarquee__item {
+    margin-right: 40px;
+  }
+
+  .brandMarquee__logo {
+    max-width: 140px;
+    height: 28px;
+  }
+}

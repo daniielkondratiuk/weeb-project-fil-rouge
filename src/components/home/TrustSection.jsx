@@ -1,3 +1,4 @@
+import BrandMarquee from "./BrandMarquee.jsx";
 import "./TrustSection.css";
 
 const logos = [
@@ -16,13 +17,7 @@ export default function TrustSection() {
           <h2 className="trustSection__title">Ils nous font confiance</h2>
 
           <div className="trustSection__panel">
-            <ul className="trustSection__logos" aria-label="Partners">
-              {logos.map((l) => (
-                <li key={l.name} className="trustSection__logo">
-                  <img className="trustSection__logoImg" src={l.src} alt={l.name} loading="lazy" />
-                </li>
-              ))}
-            </ul>
+            <BrandMarquee logos={logos} />
           </div>
         </div>
       </section>
