@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 import { fetchArticles } from "../api/articles.js";
 import { readLocalArticles } from "../api/localArticles.js";
+import { featuredArticles } from "../data/articles.js";
 
 export const categories = ["Développement", "Design", "SEO", "Accessibilité", "Outils"];
 
@@ -39,12 +40,12 @@ export function useArticles() {
         const data = await fetchArticles();
 
         if (!cancelled) {
-          setArticles([...readLocalArticles(), ...data.map(toArticle)]);
+          setArticles([...readLocalArticles(), ...featuredArticles, ...data.map(toArticle)]);
         }
       } catch (err) {
         if (!cancelled) {
           setError("Impossible de charger les articles pour le moment.");
-          setArticles(readLocalArticles());
+          setArticles([...readLocalArticles(), ...featuredArticles]);
         }
       } finally {
         if (!cancelled) {

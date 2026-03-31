@@ -2,6 +2,7 @@ import HeroSection from "../components/home/HeroSection.jsx";
 import TrustSection from "../components/home/TrustSection.jsx";
 import ResourcesSection from "../components/home/ResourcesSection.jsx";
 import TrendsSection from "../components/home/TrendsSection.jsx";
+import ArticlesSlider from "../components/home/ArticlesSlider.jsx";
 
 import "./Home.css";
 
@@ -12,7 +13,7 @@ export default function Home() {
       <TrustSection />
       <ResourcesSection />
       <TrendsSection />
+      <ArticlesSlider />
     </div>
   );
 }
-

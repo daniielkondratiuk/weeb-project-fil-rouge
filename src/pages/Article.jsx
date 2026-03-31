@@ -4,6 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import RelatedArticles from "../components/blog/RelatedArticles.jsx";
 import { fetchArticle } from "../api/articles.js";
 import { readLocalArticles } from "../api/localArticles.js";
+import { featuredArticles } from "../data/articles.js";
 import { toArticle } from "../hooks/useArticles.js";
 
 import "./Article.css";
@@ -21,7 +22,7 @@ export default function Article() {
       setIsLoading(true);
       setError("");
 
-      const local = readLocalArticles().find((item) => String(item.id) === id);
+      const local = [...readLocalArticles(), ...featuredArticles].find((item) => String(item.id) === id);
 
       if (local) {
         setArticle(local);
