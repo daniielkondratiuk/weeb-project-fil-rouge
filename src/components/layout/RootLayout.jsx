@@ -2,6 +2,7 @@ import { Outlet } from "react-router-dom";
 
 import Header from "./Header/Header.jsx";
 import Footer from "./Footer/Footer.jsx";
+import ScrollToTop from "../ui/ScrollToTop/ScrollToTop.jsx";
 
 export default function RootLayout() {
   return (
@@ -13,7 +14,7 @@ export default function RootLayout() {
       </main>
 
       <Footer />
+      <ScrollToTop />
     </div>
   );
 }
-
