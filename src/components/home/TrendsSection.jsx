@@ -28,7 +28,6 @@ export default function TrendsSection() {
             </a>
           </div>
         </div>
-        <div id="newsletter" className="trendsSection__newsletterAnchor" aria-hidden="true" />
       </section>
     </div>
   );

@@ -100,10 +100,6 @@
   display: block;
 }
 
-.trendsSection__newsletterAnchor {
-  height: 1px;
-}
-
 @media (max-width: 900px) {
   .trendsSection__grid {
     flex-direction: column;
