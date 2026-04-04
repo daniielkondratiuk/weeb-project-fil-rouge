@@ -151,3 +151,38 @@
     font-size: 16px;
   }
 }
+
+@media (max-width: 620px) {
+  .articlesSlider__slider {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .articlesSlider__card {
+    order: -1;
+    flex: 1 0 100%;
+  }
+}
+
+@media (max-width: 520px) {
+  .articlesSlider__title {
+    font-size: 34px;
+  }
+
+  .articlesSlider__slider {
+    gap: 12px;
+  }
+
+  .articlesSlider__arrow {
+    width: 40px;
+    height: 40px;
+  }
+
+  .articlesSlider__card {
+    padding: 20px;
+  }
+
+  .articlesSlider__headline {
+    font-size: 22px;
+  }
+}
