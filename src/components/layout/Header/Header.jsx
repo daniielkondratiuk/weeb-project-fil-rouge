@@ -1,17 +1,22 @@
-import { NavLink } from "react-router-dom";
-import { useMemo, useState } from "react";
+import { NavLink, useLocation } from "react-router-dom";
+import { useEffect, useMemo, useState } from "react";
 
 import Logo from "../../Logo/Logo.jsx";
 import Button from "../../ui/Button/Button.jsx";
 import "./Header.css";
 
 export default function Header() {
+  const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navClassName = useMemo(
     () => (isActive) => (isActive ? "header__link header__link--active" : "header__link"),
     []
   );
+
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [location.pathname]);
 
   return (
     <header className="header">
