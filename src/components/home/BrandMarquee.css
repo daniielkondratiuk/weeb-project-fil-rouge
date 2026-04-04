@@ -41,6 +41,12 @@
   }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .brandMarquee__track {
+    animation: none;
+  }
+}
+
 @media (max-width: 520px) {
   .brandMarquee__item {
     margin-right: 40px;

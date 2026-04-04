@@ -18,17 +18,18 @@ export default function ScrollToTop() {
     };
   }, []);
 
+  function handleClick() {
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    window.scrollTo({ top: 0, behavior: prefersReducedMotion ? "auto" : "smooth" });
+  }
+
   if (!isVisible) {
     return null;
   }
 
   return (
-    <button
-      className="scrollToTop"
-      type="button"
-      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-      aria-label="Revenir en haut de la page"
-    >
+    <button className="scrollToTop" type="button" onClick={handleClick} aria-label="Revenir en haut de la page">
       <ArrowUp size={22} aria-hidden="true" />
     </button>
   );
