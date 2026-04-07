@@ -89,6 +89,14 @@
 }
 
 @media (max-width: 900px) {
+  .heroSection {
+    padding: 50px 0;
+  }
+
+  .heroSection__inner {
+    gap: 48px;
+  }
+
   .heroSection__title {
     font-size: 56px;
   }
@@ -99,8 +107,24 @@
 }
 
 @media (max-width: 520px) {
+  .heroSection {
+    padding: 36px 0;
+  }
+
+  .heroSection__inner {
+    gap: 32px;
+  }
+
   .heroSection__title {
     font-size: 40px;
+  }
+
+  .heroSection__lead {
+    margin-top: 16px;
+  }
+
+  .heroSection__buttons {
+    margin-top: 24px;
   }
 
   .heroSection__btn--primary,
