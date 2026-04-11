@@ -26,9 +26,15 @@
   color: #ffffff;
 }
 
-@media (max-width: 520px) {
+@media (max-width: 900px) {
   .login {
     padding: 50px 0;
+  }
+}
+
+@media (max-width: 520px) {
+  .login {
+    padding: 36px 0;
   }
 
   .login__card {
