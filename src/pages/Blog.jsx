@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 
 import ArticleCard from "../components/blog/ArticleCard.jsx";
 import Button from "../components/ui/Button/Button.jsx";
@@ -8,8 +8,22 @@ import "./Blog.css";
 
 export default function Blog() {
   const { articles, isLoading, error } = useArticles();
-  const [query, setQuery] = useState("");
-  const [activeCategory, setActiveCategory] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const query = searchParams.get("q") || "";
+  const activeCategory = searchParams.get("categorie") || "";
+
+  function updateFilter(key, value) {
+    const nextParams = new URLSearchParams(searchParams);
+
+    if (value) {
+      nextParams.set(key, value);
+    } else {
+      nextParams.delete(key);
+    }
+
+    setSearchParams(nextParams, { replace: true });
+  }
 
   const visibleArticles = articles.filter((article) => {
     const matchesQuery = article.title.toLowerCase().includes(query.trim().toLowerCase());
@@ -38,7 +52,7 @@ export default function Blog() {
             id="blog-search"
             type="search"
             value={query}
-            onChange={(e) => setQuery(e.target.value)}
+            onChange={(e) => updateFilter("q", e.target.value)}
             placeholder="Rechercher un article"
             aria-label="Rechercher un article"
           />
@@ -47,7 +61,7 @@ export default function Blog() {
             <button
               className={activeCategory === "" ? "blog__category blog__category--active" : "blog__category"}
               type="button"
-              onClick={() => setActiveCategory("")}
+              onClick={() => updateFilter("categorie", "")}
               aria-pressed={activeCategory === ""}
             >
               Toutes
@@ -58,7 +72,7 @@ export default function Blog() {
                 key={category}
                 className={activeCategory === category ? "blog__category blog__category--active" : "blog__category"}
                 type="button"
-                onClick={() => setActiveCategory(category)}
+                onClick={() => updateFilter("categorie", category)}
                 aria-pressed={activeCategory === category}
               >
                 {category}
