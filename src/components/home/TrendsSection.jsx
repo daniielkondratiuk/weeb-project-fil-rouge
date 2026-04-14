@@ -7,7 +7,6 @@ export default function TrendsSection() {
       <section className="trendsSection" id="trends">
         <div className="trendsSection__grid">
           <div className="trendsSection__visual" aria-hidden="true">
-            {/* <img className="trendsSection__image" src="/images/trends.png" alt="" loading="lazy" /> */}
             <TrendsAnimation />
           </div>
 
