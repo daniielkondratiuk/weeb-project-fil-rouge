@@ -1,6 +1,7 @@
 .brandMarquee {
   width: 100%;
   overflow: hidden;
+  mask-image: linear-gradient(to right, transparent, #000 80px, #000 calc(100% - 80px), transparent);
 }
 
 .brandMarquee__track {
