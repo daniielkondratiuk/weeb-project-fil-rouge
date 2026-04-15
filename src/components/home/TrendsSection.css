@@ -9,11 +9,11 @@
 }
 
 .trendsSection__visual {
-  flex: 0 0 45%;
+  flex: 1 1 38%;
 }
 
 .trendsSection__text {
-  flex: 0 0 55%;
+  flex: 1 1 62%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
