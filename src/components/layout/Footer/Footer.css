@@ -17,20 +17,20 @@
 .siteFooter__brand {
   display: inline-flex;
   text-decoration: none;
-  flex: 0 0 20%;
+  flex: 1 1 20%;
   min-width: 0;
 }
 
 .siteFooter__columns {
   display: flex;
   gap: 48px;
-  flex: 0 0 80%;
+  flex: 1 1 80%;
   align-items: flex-start;
   justify-content: space-between;
 }
 
 .siteFooter__col {
-  flex: 0 0 25%;
+  flex: 1 1 25%;
   min-width: 0;
 }
 
