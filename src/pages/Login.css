@@ -38,10 +38,8 @@
   }
 
   .login__card {
-    padding: 30px 20px;
-  }
-
-  .login__title {
-    font-size: 32px;
+    padding: 0;
+    border: none;
+    background: none;
   }
 }
