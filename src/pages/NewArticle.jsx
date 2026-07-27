@@ -2,8 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import Button from "../components/ui/Button/Button.jsx";
-import { saveLocalArticle } from "../api/localArticles.js";
-import { categories, toExcerpt } from "../hooks/useArticles.js";
+import { createArticle } from "../api/articles.js";
+import { categories } from "../hooks/useArticles.js";
 
 import "./NewArticle.css";
 
@@ -11,29 +11,34 @@ export default function NewArticle() {
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState(categories[0]);
-  const [body, setBody] = useState("");
+  const [content, setContent] = useState("");
   const [error, setError] = useState("");
+  const [isSending, setIsSending] = useState(false);
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
 
-    if (!title.trim() || !body.trim()) {
+    if (!title.trim() || !content.trim()) {
       setError("Merci de renseigner un titre et un contenu.");
       return;
     }
 
-    saveLocalArticle({
-      id: `local-${Date.now()}`,
-      title: title.trim(),
-      body: body.trim(),
-      excerpt: toExcerpt(body.trim()),
-      category,
-    });
-
-    setTitle("");
-    setBody("");
+    setIsSending(true);
     setError("");
-    navigate("/blog");
+
+    try {
+      const article = await createArticle({
+        title: title.trim(),
+        content: content.trim(),
+        category,
+      });
+
+      navigate(`/blog/${article.id}`);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setIsSending(false);
+    }
   }
 
   return (
@@ -78,15 +83,15 @@ export default function NewArticle() {
           </div>
 
           <div className="newArticle__group">
-            <label className="newArticle__label" htmlFor="article-body">
+            <label className="newArticle__label" htmlFor="article-content">
               Contenu
             </label>
             <textarea
               className="newArticle__textarea"
-              id="article-body"
-              name="body"
-              value={body}
-              onChange={(e) => setBody(e.target.value)}
+              id="article-content"
+              name="content"
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
               rows={8}
               placeholder="Rédigez votre article ici..."
             />
@@ -98,8 +103,8 @@ export default function NewArticle() {
             </p>
           )}
 
-          <Button type="submit" variant="primary" className="newArticle__submit">
-            Publier l’article
+          <Button type="submit" variant="primary" className="newArticle__submit" disabled={isSending}>
+            {isSending ? "Publication..." : "Publier l’article"}
           </Button>
         </form>
       </section>

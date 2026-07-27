@@ -4,9 +4,9 @@ import { useArticles } from "../../hooks/useArticles.js";
 import "./RelatedArticles.css";
 
 export default function RelatedArticles({ category, currentId }) {
-  const { articles } = useArticles();
+  const { articles } = useArticles(category);
 
-  const related = articles.filter((article) => article.category === category && article.id !== currentId).slice(0, 3);
+  const related = articles.filter((article) => article.id !== currentId).slice(0, 3);
 
   if (related.length === 0) {
     return null;

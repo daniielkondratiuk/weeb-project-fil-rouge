@@ -1,30 +1,10 @@
 import { useEffect, useState } from "react";
 
 import { fetchArticles } from "../api/articles.js";
-import { readLocalArticles } from "../api/localArticles.js";
-import { featuredArticles } from "../data/articles.js";
 
 export const categories = ["Développement", "Design", "SEO", "Accessibilité", "Outils"];
 
-export function toExcerpt(text, limit = 120) {
-  if (!text) {
-    return "";
-  }
-
-  return text.length > limit ? `${text.slice(0, limit).trim()}...` : text;
-}
-
-export function toArticle(post) {
-  return {
-    id: post.id,
-    title: post.title,
-    body: post.body,
-    excerpt: toExcerpt(post.body),
-    category: categories[post.userId % categories.length],
-  };
-}
-
-export function useArticles() {
+export function useArticles(category) {
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
@@ -37,15 +17,15 @@ export function useArticles() {
       setError("");
 
       try {
-        const data = await fetchArticles();
+        const data = await fetchArticles(category);
 
         if (!cancelled) {
-          setArticles([...readLocalArticles(), ...featuredArticles, ...data.map(toArticle)]);
+          setArticles(data);
         }
       } catch (err) {
         if (!cancelled) {
           setError("Impossible de charger les articles pour le moment.");
-          setArticles([...readLocalArticles(), ...featuredArticles]);
+          setArticles([]);
         }
       } finally {
         if (!cancelled) {
@@ -59,7 +39,7 @@ export function useArticles() {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [category]);
 
   return { articles, isLoading, error };
 }

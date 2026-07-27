@@ -2,21 +2,28 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-import { featuredArticles } from "../../data/articles.js";
+import { useArticles } from "../../hooks/useArticles.js";
 import "./ArticlesSlider.css";
 
 export default function ArticlesSlider() {
+  const { articles } = useArticles();
   const [index, setIndex] = useState(0);
 
+  const featured = articles.slice(0, 5);
+
   function goPrevious() {
-    setIndex((prev) => (prev === 0 ? featuredArticles.length - 1 : prev - 1));
+    setIndex((prev) => (prev === 0 ? featured.length - 1 : prev - 1));
   }
 
   function goNext() {
-    setIndex((prev) => (prev === featuredArticles.length - 1 ? 0 : prev + 1));
+    setIndex((prev) => (prev === featured.length - 1 ? 0 : prev + 1));
   }
 
-  const current = featuredArticles[index];
+  if (featured.length === 0) {
+    return null;
+  }
+
+  const current = featured[Math.min(index, featured.length - 1)];
 
   return (
     <div className="container">
@@ -44,7 +51,7 @@ export default function ArticlesSlider() {
         </div>
 
         <div className="articlesSlider__dots">
-          {featuredArticles.map((article, dotIndex) => (
+          {featured.map((article, dotIndex) => (
             <button
               key={article.id}
               className={dotIndex === index ? "articlesSlider__dot articlesSlider__dot--active" : "articlesSlider__dot"}

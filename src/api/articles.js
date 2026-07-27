@@ -1,21 +1,23 @@
-const BASE_URL = "https://jsonplaceholder.typicode.com";
+import { request } from "./client.js";
 
-export async function fetchArticles() {
-  const response = await fetch(`${BASE_URL}/posts`);
+export function fetchArticles(category) {
+  const query = category ? `?category=${encodeURIComponent(category)}` : "";
 
-  if (!response.ok) {
-    throw new Error("Request failed");
-  }
-
-  return response.json();
+  return request(`/articles/${query}`);
 }
 
-export async function fetchArticle(id) {
-  const response = await fetch(`${BASE_URL}/posts/${id}`);
+export function fetchArticle(id) {
+  return request(`/articles/${id}/`);
+}
 
-  if (!response.ok) {
-    throw new Error("Request failed");
-  }
+export function createArticle(article) {
+  return request("/articles/", { method: "POST", body: JSON.stringify(article) });
+}
 
-  return response.json();
+export function updateArticle(id, article) {
+  return request(`/articles/${id}/`, { method: "PUT", body: JSON.stringify(article) });
+}
+
+export function deleteArticle(id) {
+  return request(`/articles/${id}/`, { method: "DELETE" });
 }

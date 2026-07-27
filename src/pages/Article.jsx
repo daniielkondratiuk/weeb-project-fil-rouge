@@ -3,9 +3,6 @@ import { Link, useParams } from "react-router-dom";
 
 import RelatedArticles from "../components/blog/RelatedArticles.jsx";
 import { fetchArticle } from "../api/articles.js";
-import { readLocalArticles } from "../api/localArticles.js";
-import { featuredArticles } from "../data/articles.js";
-import { toArticle } from "../hooks/useArticles.js";
 
 import "./Article.css";
 
@@ -22,19 +19,11 @@ export default function Article() {
       setIsLoading(true);
       setError("");
 
-      const local = [...readLocalArticles(), ...featuredArticles].find((item) => String(item.id) === id);
-
-      if (local) {
-        setArticle(local);
-        setIsLoading(false);
-        return;
-      }
-
       try {
         const data = await fetchArticle(id);
 
         if (!cancelled) {
-          setArticle(toArticle(data));
+          setArticle(data);
         }
       } catch (err) {
         if (!cancelled) {
@@ -89,7 +78,7 @@ export default function Article() {
         <h1 className="article__title">{article.title}</h1>
 
         <div className="article__body">
-          {article.body.split("\n").map((paragraph) => (
+          {article.content.split("\n").map((paragraph) => (
             <p key={paragraph} className="article__paragraph">
               {paragraph}
             </p>
