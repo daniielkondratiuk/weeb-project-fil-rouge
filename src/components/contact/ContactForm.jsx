@@ -3,6 +3,7 @@ import { useState } from "react";
 import Field from "../ui/Field/Field.jsx";
 import PhoneField from "../ui/PhoneField/PhoneField.jsx";
 import Button from "../ui/Button/Button.jsx";
+import { sendContactMessage } from "../../api/contact.js";
 import "./ContactForm.css";
 
 export default function ContactForm() {
@@ -14,8 +15,9 @@ export default function ContactForm() {
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
   const [isSent, setIsSent] = useState(false);
+  const [isSending, setIsSending] = useState(false);
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
 
     if (!nom.trim() || !prenom.trim() || !email.trim() || !message.trim()) {
@@ -24,14 +26,32 @@ export default function ContactForm() {
       return;
     }
 
-    setNom("");
-    setPrenom("");
-    setCode("");
-    setNumero("");
-    setEmail("");
-    setMessage("");
+    setIsSending(true);
     setError("");
-    setIsSent(true);
+
+    try {
+      await sendContactMessage({
+        last_name: nom.trim(),
+        first_name: prenom.trim(),
+        email: email.trim(),
+        phone_code: code.trim(),
+        phone_number: numero.trim(),
+        message: message.trim(),
+      });
+
+      setNom("");
+      setPrenom("");
+      setCode("");
+      setNumero("");
+      setEmail("");
+      setMessage("");
+      setIsSent(true);
+    } catch (err) {
+      setIsSent(false);
+      setError(err.message);
+    } finally {
+      setIsSending(false);
+    }
   }
 
   return (
@@ -58,8 +78,8 @@ export default function ContactForm() {
 
       {isSent && <p className="contactForm__success">Merci ! Votre message a bien été envoyé.</p>}
 
-      <Button type="submit" variant="primary" className="contactForm__submit">
-        Contact
+      <Button type="submit" variant="primary" className="contactForm__submit" disabled={isSending}>
+        {isSending ? "Envoi..." : "Contact"}
       </Button>
     </form>
   );
