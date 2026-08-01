@@ -1,16 +1,21 @@
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 import Field from "../ui/Field/Field.jsx";
 import Button from "../ui/Button/Button.jsx";
+import { useAuth } from "../../context/AuthContext.jsx";
 import "./LoginForm.css";
 
 export default function LoginForm() {
+  const navigate = useNavigate();
+  const { login } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [error, setError] = useState("");
+  const [isSending, setIsSending] = useState(false);
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
 
     if (!email.trim() || !password.trim()) {
@@ -18,9 +23,18 @@ export default function LoginForm() {
       return;
     }
 
-    setEmail("");
-    setPassword("");
+    setIsSending(true);
     setError("");
+
+    try {
+      await login(email.trim(), password);
+      navigate("/blog");
+    } catch (err) {
+      setError(err.message);
+      setPassword("");
+    } finally {
+      setIsSending(false);
+    }
   }
 
   return (
@@ -54,19 +68,19 @@ export default function LoginForm() {
         </p>
       )}
 
-      <Button type="submit" variant="primary" className="loginForm__submit">
-        Se connecter
+      <Button type="submit" variant="primary" className="loginForm__submit" disabled={isSending}>
+        {isSending ? "Connexion..." : "Se connecter"}
       </Button>
 
-      <a className="loginForm__forgot" href="#">
+      <Link className="loginForm__forgot" to="/password-reset">
         Mot de passe oublié ?
-      </a>
+      </Link>
 
       <p className="loginForm__signup">
         Vous n’avez pas de compte ? Vous pouvez en{" "}
-        <a className="loginForm__signupLink" href="#">
+        <Link className="loginForm__signupLink" to="/signup">
           créer un
-        </a>
+        </Link>
       </p>
     </form>
   );
