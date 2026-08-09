@@ -1,12 +1,15 @@
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useMemo, useState } from "react";
 
 import Logo from "../../Logo/Logo.jsx";
 import Button from "../../ui/Button/Button.jsx";
+import { useAuth } from "../../../context/AuthContext.jsx";
 import "./Header.css";
 
 export default function Header() {
   const location = useLocation();
+  const navigate = useNavigate();
+  const { user, logout } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navClassName = useMemo(
@@ -17,6 +20,12 @@ export default function Header() {
   useEffect(() => {
     setIsMenuOpen(false);
   }, [location.pathname]);
+
+  function handleLogout() {
+    logout();
+    setIsMenuOpen(false);
+    navigate("/");
+  }
 
   return (
     <header className="header">
@@ -42,12 +51,26 @@ export default function Header() {
             </div>
 
             <div className="header__actions">
-              <NavLink className="header__loginBtn" to="/login">
-                Log In
-              </NavLink>
-              <Button to="/login" variant="primary" className="header__cta">
-                Join Now
-              </Button>
+              {user ? (
+                <>
+                  <span className="header__user">{user.first_name}</span>
+                  <Button to="/blog/new" variant="primary" className="header__cta">
+                    Écrire un article
+                  </Button>
+                  <button className="header__loginBtn" type="button" onClick={handleLogout}>
+                    Se déconnecter
+                  </button>
+                </>
+              ) : (
+                <>
+                  <NavLink className="header__loginBtn" to="/login">
+                    Log In
+                  </NavLink>
+                  <Button to="/signup" variant="primary" className="header__cta">
+                    Join Now
+                  </Button>
+                </>
+              )}
 
               <button
                 className={isMenuOpen ? "header__burger header__burger--open" : "header__burger"}
@@ -89,12 +112,32 @@ export default function Header() {
               >
                 Contact
               </NavLink>
-              <NavLink className="header__loginBtn" to="/login" onClick={() => setIsMenuOpen(false)}>
-                Log In
-              </NavLink>
-              <Button to="/login" variant="primary" className="header__cta" onClick={() => setIsMenuOpen(false)}>
-                Join Now
-              </Button>
+
+              {user ? (
+                <>
+                  <span className="header__user">{user.first_name}</span>
+                  <Button
+                    to="/blog/new"
+                    variant="primary"
+                    className="header__cta"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Écrire un article
+                  </Button>
+                  <button className="header__loginBtn" type="button" onClick={handleLogout}>
+                    Se déconnecter
+                  </button>
+                </>
+              ) : (
+                <>
+                  <NavLink className="header__loginBtn" to="/login" onClick={() => setIsMenuOpen(false)}>
+                    Log In
+                  </NavLink>
+                  <Button to="/signup" variant="primary" className="header__cta" onClick={() => setIsMenuOpen(false)}>
+                    Join Now
+                  </Button>
+                </>
+              )}
             </div>
           ) : null}
         </div>
@@ -102,4 +145,3 @@ export default function Header() {
     </header>
   );
 }
-
