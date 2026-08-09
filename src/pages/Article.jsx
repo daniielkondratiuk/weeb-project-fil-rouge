@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 import RelatedArticles from "../components/blog/RelatedArticles.jsx";
-import { fetchArticle } from "../api/articles.js";
+import { deleteArticle, fetchArticle } from "../api/articles.js";
+import { useAuth } from "../context/AuthContext.jsx";
 
 import "./Article.css";
 
 export default function Article() {
   const { id } = useParams();
+  const navigate = useNavigate();
+  const { user } = useAuth();
   const [article, setArticle] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
@@ -44,6 +47,19 @@ export default function Article() {
     };
   }, [id]);
 
+  async function handleDelete() {
+    if (!window.confirm("Voulez-vous vraiment supprimer cet article ?")) {
+      return;
+    }
+
+    try {
+      await deleteArticle(article.id);
+      navigate("/blog");
+    } catch (err) {
+      setError(err.message);
+    }
+  }
+
   if (isLoading) {
     return (
       <div className="container">
@@ -67,6 +83,8 @@ export default function Article() {
     );
   }
 
+  const isOwner = user !== null && user.id === article.author;
+
   return (
     <div className="container">
       <article className="article">
@@ -76,6 +94,17 @@ export default function Article() {
 
         <p className="article__category">{article.category}</p>
         <h1 className="article__title">{article.title}</h1>
+
+        {isOwner && (
+          <div className="article__owner">
+            <Link className="article__action" to={`/blog/${article.id}/edit`}>
+              Modifier
+            </Link>
+            <button className="article__action article__action--danger" type="button" onClick={handleDelete}>
+              Supprimer
+            </button>
+          </div>
+        )}
 
         <div className="article__body">
           {article.content.split("\n").map((paragraph) => (

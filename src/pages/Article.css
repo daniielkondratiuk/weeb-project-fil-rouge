@@ -43,6 +43,41 @@
   color: #ffffff;
 }
 
+.article__owner {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.article__action {
+  padding: 8px 16px;
+  border: 1px solid rgba(175, 82, 222, 0.6);
+  border-radius: 8px;
+  background: transparent;
+  color: #ffffff;
+  text-decoration: none;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 180ms ease, color 180ms ease;
+}
+
+.article__action:hover {
+  border-color: #c084fc;
+  color: #c084fc;
+}
+
+.article__action:focus-visible {
+  outline: 2px solid rgba(192, 132, 252, 0.6);
+  outline-offset: 2px;
+}
+
+.article__action--danger:hover {
+  border-color: #fca5a5;
+  color: #fca5a5;
+}
+
 .article__body {
   display: flex;
   flex-direction: column;
