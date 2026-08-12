@@ -3,6 +3,9 @@
 Ce rapport explique les choix faits pendant la première semaine du projet : la partie vitrine du
 site de Weeb, et les premières pages du blog.
 
+La dernière section, « Mise à jour — semaine 2 », dit ce qui a changé quand le site a été branché sur
+l'API Django. Là où elle contredit ce qui est écrit avant elle, c'est elle qui décrit le code actuel.
+
 ## L'architecture des dossiers
 
     src/
@@ -114,3 +117,51 @@ sections de l'accueil sont dans src/components/home. Une route s'ajoute dans src
 Les couleurs et la largeur du contenu se règlent dans src/styles/globals.css. Et la provenance des
 articles se change dans src/api/articles.js pour l'API, ou dans src/data/articles.js pour les
 articles en dur.
+
+## Mise à jour — semaine 2
+
+Le site ne vit plus tout seul. Les données viennent maintenant d'une API Django écrite pour la
+deuxième semaine, dans un dépôt séparé : https://github.com/daniielkondratiuk/weeb-backend_daniiel_kondratiuk
+
+Il faut donc lancer les deux : l'API sur le port 8000, le site sur le port 5173. La marche à suivre
+est dans le README du dépôt de l'API.
+
+Ce qui remplace ce qui est écrit plus haut. Les articles ne viennent plus de trois endroits mais d'un
+seul, la base de données : le dossier src/data et le fichier src/api/localArticles.js ont été
+supprimés, et le slider de l'accueil affiche les cinq articles les plus récents au lieu d'une liste
+écrite en dur. L'accueil fait donc maintenant un appel réseau, et la section ne s'affiche pas tant
+que la liste est vide. Les formulaires envoient vraiment quelque chose : le message de contact est
+enregistré en base, la connexion demande un jeton, la création d'article publie pour de bon. Et le
+dossier src/api ne contient plus seulement des fetch : il porte aussi client.js, qui ajoute le jeton
+à chaque requête et le renouvelle une fois quand il a expiré.
+
+Deux dossiers sont apparus : src/context, avec le contexte d'authentification, et
+src/components/auth, avec la route protégée et le formulaire d'inscription. Le contexte est le seul
+état vraiment global de l'application : savoir qui est connecté sert au header, au blog, à la page
+d'un article et à la route protégée, c'est-à-dire à quatre endroits éloignés les uns des autres.
+
+Les adresses des pages sont désormais toutes en anglais, pour rester cohérentes avec le reste du
+code : /blog/new remplace /blog/nouveau, et le filtre du blog s'écrit ?category= au lieu de
+?categorie=. Quatre pages ont été ajoutées : l'inscription, la demande de réinitialisation du mot de
+passe, le choix du nouveau mot de passe, et la modification d'un article.
+
+Les deux premières ne sortent pas de nulle part. Sur la page de connexion dessinée à la semaine 1, le
+lien « Mot de passe oublié ? » et le lien « créer un » existaient déjà mais ne menaient nulle part.
+Maintenant ils mènent quelque part. La maquette ne donne aucune de ces quatre pages : j'ai repris la
+carte de la page Login, avec la même bordure violette et les mêmes champs, pour qu'elles restent dans
+la même famille.
+
+Le header change selon la personne. Un visiteur voit Log In et Join Now, qui mène désormais à
+l'inscription. Une personne connectée voit son prénom, un lien vers l'écriture d'un article et un
+bouton de déconnexion. Les deux blocs du header, celui du grand écran et celui du menu mobile, ont
+été modifiés tous les deux.
+
+Le bouton « Écrire un article » du blog n'apparaît que si l'on est connecté, mais cacher un bouton ne
+protège rien : la route /blog/new est vraiment fermée, et taper l'adresse à la main renvoie vers la
+page de connexion. Sur la page d'un article, les boutons Modifier et Supprimer ne s'affichent que
+pour l'auteur, et l'API refuse de toute façon la requête si elle vient de quelqu'un d'autre.
+
+Les dépendances n'ont pas bougé : toujours les quatre mêmes. Le jeton est gardé dans le localStorage
+et envoyé à la main dans l'en-tête, ce qui évite d'ajouter une bibliothèque de requêtes juste pour
+ça. Un jeton dans le navigateur reste lisible par un script injecté : c'est le compromis assumé d'un
+projet d'école, et la vraie parade serait de le sortir du stockage du navigateur.
